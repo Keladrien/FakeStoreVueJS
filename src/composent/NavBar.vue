@@ -4,35 +4,35 @@
             <RouterLink to="/">FakeStore</RouterLink>
         </h1>
 
-
-        <div v-if="!isUserConnected">
+        <div v-if="!connectedUser.isConnected">
             <ul>
+                <li>Connexion</li>
                 <li>
-                    Connexion
-                </li>
-                <li>
-                    <RouterLink to="/newUser">Créé un compte</RouterLink>
+                    <RouterLink to="/newUser">Créer un compte</RouterLink>
                 </li>
             </ul>
         </div>
+
         <div v-else>
             <ul>
-                <li>Connected</li>
+                <button @click="connectedUser.disconnect()">Deconnexion</button>
             </ul>
         </div>
 
+        <button @click="toggleConnection">
+            tests
+        </button>
     </div>
-
-    <button @click="connectedUser.isConnecte">tests</button>
 </template>
 
-<script>
-import { useUserStore } from '@/stores/connected';
+<script setup>
+import { useUserStore } from '@/stores/connected'
 
-const connectedUser = useUserStore
+const connectedUser = useUserStore()
 
-
-
+const toggleConnection = () => {
+    connectedUser.isConnected = !connectedUser.isConnected
+}
 </script>
 
 <style scoped></style>

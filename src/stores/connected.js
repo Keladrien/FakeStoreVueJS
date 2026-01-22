@@ -4,15 +4,12 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore("user", () => {
   const user = ref(null);
 
-  const isConnecte = computed(() => user.value !== null);
+  const isConnected = ref(false);
 
-  const connexion = (data) => {
-    user.value = data;
-  };
-  const deconnexion = () => {
+  const disconnect = () => {
     user.value = null;
+    isConnected.value = false;
   };
-
   const cart = [];
 
   const addCart = (itemId) => {
@@ -23,5 +20,5 @@ export const useUserStore = defineStore("user", () => {
     cart.splice(index, 1);
   };
 
-  return { user, isConnecte, connexion, deconnexion, cart, addCart, rmvCart };
+  return { user, isConnected, disconnect, cart, addCart, rmvCart };
 });

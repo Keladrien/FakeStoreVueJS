@@ -19,7 +19,7 @@ import { useUserStore } from "@/stores/connected";
 import router from "@/router";
 
 const utilisateur = ref({});
-const connectedUser = useUserStore
+const connectedUser = useUserStore()
 const email = ref("");
 const pwd = ref("");
 
@@ -30,7 +30,8 @@ const creerUtilisateur = async (e) => {
         const result = await createUserWithEmailAndPassword(auth, email.value, pwd.value);
         utilisateur.value = result.user;
         console.log(utilisateur.value);
-        connectedUser.connexion(result.user)
+        connectedUser.user = result
+        connectedUser.connexion()
         router.push("/")
     } catch (error) {
         console.error("Échec de la création de l'utilisateur", error);
