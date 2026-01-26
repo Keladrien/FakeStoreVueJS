@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import useAPI from '@/composable/useAPI';
 import ItemCard from './ItemCard.vue';
 
