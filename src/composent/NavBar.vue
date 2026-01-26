@@ -6,7 +6,9 @@
 
         <div v-if="!connectedUser.isConnected">
             <ul>
-                <li>Connexion</li>
+                <li>
+                    <RouterLink to="/signIn">Connexion</RouterLink>
+                </li>
                 <li>
                     <RouterLink to="/newUser">Créer un compte</RouterLink>
                 </li>
@@ -19,9 +21,7 @@
             </ul>
         </div>
 
-        <button @click="toggleConnection">
-            tests
-        </button>
+
     </div>
 </template>
 
@@ -30,9 +30,7 @@ import { useUserStore } from '@/stores/connected'
 
 const connectedUser = useUserStore()
 
-const toggleConnection = () => {
-    connectedUser.isConnected = !connectedUser.isConnected
-}
+
 </script>
 
 <style scoped></style>

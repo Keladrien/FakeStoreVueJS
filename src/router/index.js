@@ -1,3 +1,4 @@
+import Connexion from "@/composent/Connexion.vue";
 import Details from "@/composent/Details.vue";
 import Home from "@/composent/Home.vue";
 import NewUser from "@/composent/NewUser.vue";
@@ -11,6 +12,7 @@ const router = createRouter({
     { path: "/products", component: ProductList },
     { path: "/products/detail", component: Details },
     { path: "/newUser", component: NewUser },
+    { path: "/signIn", component: Connexion },
   ],
 });
 

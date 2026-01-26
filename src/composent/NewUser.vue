@@ -30,8 +30,8 @@ const creerUtilisateur = async (e) => {
         const result = await createUserWithEmailAndPassword(auth, email.value, pwd.value);
         utilisateur.value = result.user;
         console.log(utilisateur.value);
-        connectedUser.user = result
-        connectedUser.connexion()
+        connectedUser.user = result;
+        connectedUser.isConnected = true;
         router.push("/")
     } catch (error) {
         console.error("Échec de la création de l'utilisateur", error);
