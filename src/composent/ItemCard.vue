@@ -1,11 +1,11 @@
 <template>
-    <article class="card">
+    <article class="card" :id="category" @click="onClick(id)">
         <img :src="img" :alt="title" class="card-img" />
 
         <div class="card-content">
             <h2 class="card-title">{{ title }}</h2>
 
-            <p class="card-desc">{{ desc }}</p>
+            <p class="card-desc">{{ category }}</p>
 
             <div class="card-footer">
                 <span class="card-price">{{ price }} $</span>
@@ -17,15 +17,25 @@
 
 
 <script setup>
+import router from '@/router';
+
+const onClick = (detailID) => {
+    router.push(`/products/detail/${detailID}`)
+}
+
+
 
 defineProps([
+    "id",
     "title",
     "img",
-    "desc",
     "price",
     "rank",
+    "category"
 
 ])
+
+
 
 </script>
 
