@@ -1,14 +1,16 @@
 <template>
-    <div>
-        <form @submit="creerUtilisateur">
+    <div class="auth-container">
+        <form class="auth-card" @submit="creerUtilisateur">
+            <h2>Créer un compte</h2>
+
             <input type="email" v-model="email" placeholder="Entrez l'email" />
-            <br />
             <input type="password" v-model="pwd" placeholder="Entrez le mot de passe" />
-            <br />
+
             <button type="submit">Créer un compte</button>
         </form>
     </div>
 </template>
+
 
 <script setup>
 
@@ -38,3 +40,66 @@ const creerUtilisateur = async (e) => {
     }
 };
 </script>
+
+<style scoped>
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.auth-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.auth-card input {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: #2c5364;
+    box-shadow: 0 0 0 2px rgba(44, 83, 100, 0.2);
+}
+
+.auth-card button {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: #2c5364;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.auth-card button:hover {
+    background: #203a43;
+}
+
+.auth-card button:active {
+    transform: scale(0.97);
+}
+</style>

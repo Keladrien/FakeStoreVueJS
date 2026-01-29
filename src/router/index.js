@@ -1,5 +1,4 @@
 import Connexion from "@/composent/Connexion.vue";
-import Details from "@/composent/Details.vue";
 import Home from "@/composent/Home.vue";
 import NewUser from "@/composent/NewUser.vue";
 import ProductList from "@/composent/ProductList.vue";
@@ -10,7 +9,6 @@ const router = createRouter({
   routes: [
     { path: "/", component: Home },
     { path: "/products", component: ProductList },
-    { path: "/products/detail/:id", component: Details, props: true },
     { path: "/newUser", component: NewUser },
     { path: "/signIn", component: Connexion },
   ],

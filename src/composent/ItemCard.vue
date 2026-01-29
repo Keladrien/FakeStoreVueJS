@@ -1,5 +1,6 @@
 <template>
-    <article class="card" :id="category" @click="onClick(id)">
+    <article class="card" @click="emit('open', id)">
+
         <img :src="img" :alt="title" class="card-img" />
 
         <div class="card-content">
@@ -17,13 +18,7 @@
 
 
 <script setup>
-import router from '@/router';
-
-const onClick = (detailID) => {
-    router.push(`/products/detail/${detailID}`)
-}
-
-
+const emit = defineEmits(["open"])
 
 defineProps([
     "id",
@@ -32,12 +27,9 @@ defineProps([
     "price",
     "rank",
     "category"
-
 ])
-
-
-
 </script>
+
 
 <style scoped>
 .card {
