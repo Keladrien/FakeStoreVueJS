@@ -19,6 +19,12 @@
                         <span class="rank">⭐ {{ item.rating.rate }}</span>
                     </div>
 
+
+                    <button v-if="userStore.isConnected" class="add-cart" @click="addToCart">
+                        Ajouter au panier
+                    </button>
+
+
                     <button class="close" @click="emit('close')">Fermer</button>
                 </div>
             </template>
@@ -29,11 +35,23 @@
 
 <script setup>
 import useAPI from '@/composable/useAPI'
-
+import { useUserStore } from "@/stores/connected";
 const emit = defineEmits(["close"])
 const props = defineProps(["id"])
 
+const userStore = useUserStore();
+
+
 const item = useAPI(`https://fakestoreapi.com/products/${props.id}`).data
+
+const addToCart = () => {
+    if (!userStore.isConnected) {
+        alert("Vous devez être connecté pour ajouter au panier");
+        return;
+    }
+    userStore.addCart(userStore.user.user.uid, item.value.id);
+};
+
 </script>
 
 <style scoped>
@@ -125,5 +143,24 @@ h1 {
     background: #2a7fff;
     color: white;
     cursor: pointer;
+}
+
+.add-cart {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 8px;
+    background: #2ecc71;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.add-cart:hover {
+    background: #27ae60;
+}
+
+.add-cart:active {
+    transform: scale(0.97);
 }
 </style>

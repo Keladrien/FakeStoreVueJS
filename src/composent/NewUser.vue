@@ -2,7 +2,7 @@
     <div class="auth-container">
         <form class="auth-card" @submit="creerUtilisateur">
             <h2>Créer un compte</h2>
-
+            <input type="text" v-model="displayName" placeholder="Entrez votre nom">
             <input type="email" v-model="email" placeholder="Entrez l'email" />
             <input type="password" v-model="pwd" placeholder="Entrez le mot de passe" />
 
@@ -16,7 +16,7 @@
 
 import { ref } from "vue";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { useUserStore } from "@/stores/connected";
 import router from "@/router";
 
@@ -24,12 +24,16 @@ const utilisateur = ref({});
 const connectedUser = useUserStore()
 const email = ref("");
 const pwd = ref("");
+const displayName = ref("");
 
 
 const creerUtilisateur = async (e) => {
     e.preventDefault();
     try {
         const result = await createUserWithEmailAndPassword(auth, email.value, pwd.value);
+        await updateProfile(result.user, {
+            displayName: displayName.value
+        })
         utilisateur.value = result.user;
         console.log(utilisateur.value);
         connectedUser.user = result;

@@ -16,8 +16,13 @@
         </ul>
 
         <ul class="nav-actions" v-else>
+            <li class="userGreet">Bonjour {{ connectedUser.user.user.displayName }}</li>
             <li>
-                <button class="nav-link danger" @click="connectedUser.disconnect()">
+                <RouterLink to="/cart" class="nav-link basket">🛒 Panier</RouterLink>
+
+            </li>
+            <li>
+                <button class="nav-link danger" @click="onDisconnect()">
                     Déconnexion
                 </button>
             </li>
@@ -27,14 +32,24 @@
 
 
 <script setup>
+
+
+import router from '@/router';
 import { useUserStore } from '@/stores/connected'
 
 const connectedUser = useUserStore()
 
-
-</script>
+const onDisconnect = () => {
+    connectedUser.disconnect(),
+        router.push("/")
+} </script>
 
 <style scoped>
+.userGreet {
+    color: #236ddb;
+    font-weight: bold;
+}
+
 .navbar {
     position: sticky;
     top: 0;
@@ -64,6 +79,7 @@ const connectedUser = useUserStore()
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center
 }
 
 .nav-link {
@@ -81,10 +97,6 @@ const connectedUser = useUserStore()
     transition: all 0.25s ease;
 }
 
-.nav-link:hover {
-    background: #eaeaea;
-    transform: translateY(-1px);
-}
 
 .primary {
     background: #2a7fff;
@@ -104,11 +116,19 @@ const connectedUser = useUserStore()
     background: #d9363e;
 }
 
-
-.router-link-active {
+.basket {
     background: #2a7fff;
     color: white;
+    text-decoration: none;
 }
+
+
+.basket:hover {
+    background: #236ddb;
+}
+
+
+
 
 @media (max-width: 640px) {
     .navbar {
